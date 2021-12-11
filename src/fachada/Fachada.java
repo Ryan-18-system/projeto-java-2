@@ -50,6 +50,7 @@ public class Fachada {
 			return aux;
 			}
 		}
+		return todos;
 	}
 
 	public static Contato criarContato(String nome,String nascimento, String endereco)	throws  Exception {
@@ -78,7 +79,25 @@ public class Fachada {
 	public static Telefone adicionarTelefoneContato(String numero, String nome)	throws  Exception{
 		nome = nome.trim();
 		numero = numero.trim();
-
+		Contato c = repositorio.localizarContato(nome);
+		if (c==null)
+			throw  new Exception("Contato não cadastrado: " + nome);
+		Telefone t = repositorio.localizarTelefone(numero);
+		if (t==null){
+			t = new Telefone(numero);
+			repositorio.adicionar(t);
+			c.adicionar(t);
+			t.adicionar(c);
+		}else{
+			Telefone t2 = repositorio.localizarTelefone(numero);
+			if(t2 != null)
+				throw  new Exception("o contato ja possui este número: "+numero);
+			else{
+				c.adicionar(t);
+				t.adicionar(c);
+			}
+		}
+		return t;
 		/*
 		 * localizar contato  no repositorio
 		 * localizar  telefone  no repositorio
