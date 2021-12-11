@@ -39,18 +39,16 @@ public class Fachada {
 
 	public static ArrayList<Telefone> listarTelefones(String digitos) {
 		ArrayList<Telefone> todos = repositorio.getTelefones();
-		if (digitos.isEmpty()){
+		if (digitos.isEmpty())
 			return  todos;
-		}else{
+		else{
 			ArrayList<Telefone> aux  = new ArrayList<>();
-			for (Telefone tel: todos){
-				if(tel.getNumero().contains(digitos)){
+			for (Telefone tel: todos)
+				if(tel.getNumero().contains(digitos))
 					aux.add(tel);
-				}
 			return aux;
-			}
+
 		}
-		return todos;
 	}
 
 	public static Contato criarContato(String nome,String nascimento, String endereco)	throws  Exception {
@@ -111,7 +109,7 @@ public class Fachada {
 	public static void removerTelefoneContato(String numero, String nome) throws  Exception{
 		nome = nome.trim();
 		numero = numero.trim();
-
+        
 		/*
 		 * localizar contato  no repositorio
 		 * localizar  telefone  no repositorio
@@ -220,6 +218,17 @@ public class Fachada {
 		} 
 		arquivo2.close();	
 	}
+	/*public  static  void main(String[] args){
+		try {
+			criarContato("ryan", "25/04/2002", "epitacio");
+			adicionarTelefoneContato("83987466214","ryan");
+			System.out.println(listarTelefones(""));
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+
+
+	}*/
 }
 
 
