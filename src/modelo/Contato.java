@@ -1,5 +1,6 @@
 package modelo;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 /**********************************
  * IFPB - Curso Superior de Tec. em Sist. para Internet
@@ -72,9 +73,16 @@ public class Contato {
 		return null;
 	}
 	
-	public int getIdade() {
+	public int getIdade() throws Exception {
 		//calcular a idade usando a data de nascimento e data do computador
-		return 0;
+		LocalDate dataNasc;
+		LocalDate hoje = LocalDate.now();
+		String nascimento = getNascimentoStr();
+		DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		dataNasc = LocalDate.parse(nascimento, parser);
+
+		Period p = Period.between(dataNasc, hoje);
+		return p.getYears();
 	}
 
 

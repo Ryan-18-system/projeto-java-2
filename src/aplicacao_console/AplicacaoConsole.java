@@ -7,34 +7,34 @@ public class AplicacaoConsole {
 
 	public AplicacaoConsole() {
 		try {
-			Contato contato;				
-			Telefone telefone;		
+			Contato contato;
+			Telefone telefone;
 			Fachada.inicializar();
 
-			contato = Fachada.criarContato("Ryan", "25/04/2002","busto tamandare");
-			telefone = Fachada.adicionarTelefoneContato("98736121", "Ryan");
+			contato = Fachada.criarContato("Ryan", "12/12/2021","busto tamandare");
+			telefone = Fachada.adicionarTelefoneContato("00000000", "Ryan");
 			telefone = Fachada.adicionarTelefoneContato("99999999", "Ryan");
 			System.out.println("novo contato:"+contato);
-			
-			/*Fachada.alterarTelefone("00000000", "12308120");
-			Fachada.removerTelefoneContato("11111111", "teste");
-			Fachada.removerTelefoneContato("99999999", "teste");*/
+
+			Fachada.alterarTelefone("00000000", "11111111");
+			Fachada.removerTelefoneContato("11111111", "Ryan");
+			Fachada.removerTelefoneContato("99999999", "Ryan");
 
 			System.out.println("\n---------listagem de contatos-----");
-			for(Contato c : Fachada.listarContatos("")) 
+			for(Contato c : Fachada.listarContatos(""))
 				System.out.println(c);
 			System.out.println("\n---------listagem de telefones");
-			for(Telefone t : Fachada.listarTelefones("")) 
+			for(Telefone t : Fachada.listarTelefones(""))
 				System.out.println(t);
 
 			Fachada.finalizar();
 
 		} catch (Exception e) {
 			System.out.println("--->"+e.getMessage());
-		}		
+		}
 
 		//****************
-		testarExcecoes();
+		//testarExcecoes();
 		//****************
 
 	}
@@ -43,43 +43,40 @@ public class AplicacaoConsole {
 	public static void testarExcecoes()
 	{
 		System.out.println("\n-------TESTE EXCEÇÕES LANÇADAS--------");
-		try 
+		try
 		{
 			Contato contato = Fachada.criarContato("teste", "11/11/2021","busto tamandare");
-			System.out.println("*************1--->Nao lançou exceção para: criar contato "); 
+			System.out.println("*************1--->Nao lançou exceção para: criar contato ");
 		}catch (Exception e) {System.out.println("1ok--->"+e.getMessage());}
 
-		try 
+		try
 		{
 			Telefone telefone;
 			telefone = Fachada.adicionarTelefoneContato("22222222", "teste");
 			telefone = Fachada.adicionarTelefoneContato("22222222", "teste");
-			System.out.println("*************2--->Nao lançou exceção para: ad telefone"); 
+			System.out.println("*************2--->Nao lançou exceção para: ad telefone");
 		}catch (Exception e) {System.out.println("2ok--->"+e.getMessage());}
 
-		try 
+		try
 		{
 			Fachada.removerTelefoneContato("22222222", "teste");
 			Fachada.alterarTelefone("22222222", "33333333");
-			System.out.println("*************3--->Nao lançou exceção: alterar telefone "); 
+			System.out.println("*************3--->Nao lançou exceção: alterar telefone ");
 		}catch (Exception e) {System.out.println("3ok--->"+e.getMessage());}
 
-		try 
+		try
 		{
 			Telefone telefone = Fachada.adicionarTelefoneContato("22222222", "teste");
 			Fachada.alterarTelefone("22222222", "22222222");
-			System.out.println("*************4--->Nao lançou exceção: alterar telefone "); 
+			System.out.println("*************4--->Nao lançou exceção: alterar telefone ");
 		}catch (Exception e) {System.out.println("4ok--->"+e.getMessage());}
 	}
 
 
 
-	public static void main (String[] args) 
+	public static void main (String[] args)
 	{
 		AplicacaoConsole aplicacaoConsole = new AplicacaoConsole();
 	}
-
-
 }
-
 
