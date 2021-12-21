@@ -11,14 +11,14 @@ public class AplicacaoConsole {
 			Telefone telefone;
 			Fachada.inicializar();
 
-			contato = Fachada.criarContato("Ryan", "12/12/2021","busto tamandare");
-			telefone = Fachada.adicionarTelefoneContato("00000000", "Ryan");
-			telefone = Fachada.adicionarTelefoneContato("99999999", "Ryan");
+			contato = Fachada.criarContato("teste1", "11/11/2021","busto tamandare");
+			telefone = Fachada.adicionarTelefoneContato("00000000", "teste1");
+			telefone = Fachada.adicionarTelefoneContato("99999999", "teste1");
 			System.out.println("novo contato:"+contato);
 
 			Fachada.alterarTelefone("00000000", "11111111");
-			Fachada.removerTelefoneContato("11111111", "Ryan");
-			Fachada.removerTelefoneContato("99999999", "Ryan");
+			Fachada.removerTelefoneContato("11111111", "teste1");
+			Fachada.removerTelefoneContato("99999999", "teste1");
 
 			System.out.println("\n---------listagem de contatos-----");
 			for(Contato c : Fachada.listarContatos(""))
@@ -34,7 +34,7 @@ public class AplicacaoConsole {
 		}
 
 		//****************
-		//testarExcecoes();
+		testarExcecoes();
 		//****************
 
 	}
@@ -46,6 +46,7 @@ public class AplicacaoConsole {
 		try
 		{
 			Contato contato = Fachada.criarContato("teste", "11/11/2021","busto tamandare");
+			contato = Fachada.criarContato("teste", "11/11/2021","busto tamandare");
 			System.out.println("*************1--->Nao lançou exceção para: criar contato ");
 		}catch (Exception e) {System.out.println("1ok--->"+e.getMessage());}
 

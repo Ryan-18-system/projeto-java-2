@@ -42,7 +42,7 @@ public class Fachada {
 
     public static ArrayList<Telefone> listarTelefones(String digitos) {
         ArrayList<Telefone> todos = repositorio.getTelefones();
-        if (digitos.isEmpty())
+        if (digitos == null)
             return todos;
         else {
             ArrayList<Telefone> aux = new ArrayList<>();
@@ -77,29 +77,31 @@ public class Fachada {
     }
 
     public static Telefone adicionarTelefoneContato(String numero, String nome) throws Exception {
-        nome = nome.trim();
-        numero = numero.trim();
-        Contato c = repositorio.localizarContato(nome);
-        if (c == null)
-            throw new Exception("Contato não cadastrado: " + nome);
-        Telefone t = repositorio.localizarTelefone(numero);
-        if (t == null) {
-            t = new Telefone(numero);
-            repositorio.adicionar(t);
-            c.adicionar(t);
-            t.adicionar(c);
-        } else {
-            Telefone t2 = repositorio.localizarTelefone(numero);
-            if (t2 != null)
-                throw new Exception("o contato ja possui este número: " + numero);
+            nome = nome.trim();
+            numero = numero.trim();
+
+            Contato contato = repositorio.localizarContato(nome);
+
+            Telefone telefone = repositorio.localizarTelefone(numero);
+
+            if (telefone!=null) {
+                if (contato.localizarTelefone(numero) != null)
+                    throw new Exception("Telefone já atribuído para este contato");
+                else {
+                    contato.adicionar(telefone);
+                    telefone.adicionar(contato);
+                    return telefone;
+                }
+            }
             else {
-                c.adicionar(t);
-                t.adicionar(c);
+                telefone = new Telefone(numero);
+                telefone.adicionar(contato);
+                repositorio.adicionar(telefone);
+                contato.adicionar(telefone);
+                return telefone;
             }
         }
-        return t;
-
-    }
+    
 
     public static void removerTelefoneContato(String numero, String nome) throws Exception {
         nome = nome.trim();
