@@ -101,7 +101,7 @@ public class Fachada {
                 return telefone;
             }
         }
-    
+
 
     public static void removerTelefoneContato(String numero, String nome) throws Exception {
         nome = nome.trim();
@@ -109,13 +109,12 @@ public class Fachada {
         Contato contato = repositorio.localizarContato(nome);
         if (Objects.isNull(contato)) {
             throw new Exception("Este contato é inexistente");
-
         }
         Telefone telefone = contato.localizarTelefone(numero);
-        repositorio.remover(telefone);
         contato.remover(telefone);
+        telefone.remover(contato);
         if (contato.getTelefones().isEmpty()) {
-            repositorio.remover(contato);
+            repositorio.remover(telefone);
 
         }
     }
@@ -221,17 +220,7 @@ public class Fachada {
         }
         arquivo2.close();
     }
-	/*public  static  void main(String[] args){
-		try {
-			criarContato("ryan", "25/04/2002", "epitacio");
-			adicionarTelefoneContato("83987466214","ryan");
-			System.out.println(listarTelefones(""));
-		}catch (Exception e){
-			System.out.println(e.getMessage());
-		}
 
-
-	}*/
 }
 
 

@@ -75,13 +75,9 @@ public class Contato {
 	
 	public int getIdade() throws Exception {
 		//calcular a idade usando a data de nascimento e data do computador
-		LocalDate dataNasc;
-		LocalDate hoje = LocalDate.now();
-		String nascimento = getNascimentoStr();
-		DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		dataNasc = LocalDate.parse(nascimento, parser);
 
-		Period p = Period.between(dataNasc, hoje);
+		LocalDate hoje = LocalDate.now();
+		Period p = Period.between(nascimento, hoje);
 		return p.getYears();
 	}
 
